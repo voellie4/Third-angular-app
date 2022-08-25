@@ -1,0 +1,33 @@
+<div class="container">
+  <app-cockpit (serverCreated)="onServerAdded($event)"
+  (blueprintCreated)="onBlueprintAdded($event)"></app-cockpit>
+  <hr>
+  <div class="row">
+    <div class="col-xs-12">
+      <app-server-element *ngFor="let serverElement of serverElements" [srvElement]="serverElement">
+        <!-- <p #childContent></p> -->
+        <p>
+          <strong *ngIf="serverElement.type === 'server'" style="color: red">{{ serverElement.content }}</strong>
+          <em *ngIf="serverElement.type === 'blueprint'">{{ serverElement.content }}</em>
+        </p>
+      </app-server-element>
+    </div>
+  </div>
+
+  <hr>
+  <p>app-server-element needs an input called element, therefore [element] in the tag and set to serverElement</p>
+  <p>app-cockpit has an event [serverCreated]. When Add btn in cockpit is clicked, onAddServer event is trigger => serverCreated event is emitted => execute onServerAdded</p>
+  <p>local references - use #var in input instead of 2 way binding ngModel or in any element (for p to print the content) then use var directly on the same html as input for any function. This var has type HTMLInputElement</p>
+  <p>in sub component (server-element) html, place ng-content tag. In main component (app) where calling sub component, place content between sub component tag which is represented by ng-content</p>
+  <p>child content - use #var in main component. work with ng-Content</p>
+
+  <hr>
+  <h1>Assignment 4</h1>
+  <app-game-control (gameStarted)="onGameStarted($event)"></app-game-control>
+  <div class="row">
+    <!-- <app-odd *ngFor="let odd of odds" [oddCnt]="odd"></app-odd>
+    <app-even *ngFor="let even of evens" [evenCnt]="even"></app-even> -->
+    <app-odd *ngIf="oddEvenCnt%2!=0" [oddCnt]="oddEvenCnt"></app-odd>
+    <app-even *ngIf="oddEvenCnt%2==0" [evenCnt]="oddEvenCnt"></app-even>
+  </div>
+</div>
